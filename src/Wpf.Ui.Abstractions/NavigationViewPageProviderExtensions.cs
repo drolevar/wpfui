@@ -15,11 +15,12 @@ public static class NavigationViewPageProviderExtensions
     /// </summary>
     /// <typeparam name="TPage">The type of the page to retrieve.</typeparam>
     /// <param name="navigationViewPageProvider">The page service instance.</param>
+    /// <param name="pageTag">The page tag (optional).</param>
     /// <returns>An instance of the specified page type, or null if the page is not found.</returns>
-    public static TPage? GetPage<TPage>(this INavigationViewPageProvider navigationViewPageProvider)
+    public static TPage? GetPage<TPage>(this INavigationViewPageProvider navigationViewPageProvider, string? pageTag = null)
         where TPage : class
     {
-        return navigationViewPageProvider.GetPage(typeof(TPage)) as TPage;
+        return navigationViewPageProvider.GetPage(typeof(TPage), pageTag) as TPage;
     }
 
     /// <summary>
@@ -28,12 +29,13 @@ public static class NavigationViewPageProviderExtensions
     /// </summary>
     /// <typeparam name="TPage">The type of the page to retrieve.</typeparam>
     /// <param name="navigationViewPageProvider">The page service instance.</param>
+    /// <param name="pageTag">The page tag (optional).</param>
     /// <returns>An instance of the specified page type.</returns>
     /// <exception cref="NavigationException">Thrown when the specified page type is not found.</exception>
-    public static TPage GetRequiredPage<TPage>(this INavigationViewPageProvider navigationViewPageProvider)
+    public static TPage GetRequiredPage<TPage>(this INavigationViewPageProvider navigationViewPageProvider, string? pageTag = null)
         where TPage : class
     {
-        return navigationViewPageProvider.GetPage(typeof(TPage)) as TPage
+        return navigationViewPageProvider.GetPage(typeof(TPage), pageTag) as TPage
             ?? throw new NavigationException($"{typeof(TPage)} page not found.");
     }
 }

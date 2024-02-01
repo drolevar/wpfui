@@ -14,7 +14,7 @@ public class DependencyInjectionNavigationViewPageProvider(IServiceProvider serv
     : INavigationViewPageProvider
 {
     /// <inheritdoc />
-    public object? GetPage(Type pageType)
+    public object? GetPage(Type pageType, string? pageTag)
     {
         return serviceProvider.GetService(pageType);
     }
