@@ -213,12 +213,12 @@ public interface INavigationView
     bool NavigateWithHierarchy(Type pageType, object? dataContext = null);
 
     /// <summary>
-    /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering an <see cref="SelectionChanged"/>.
+    /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering a <see cref="SelectionChanged"/>.
     /// </summary>
-    bool ReplaceContent(Type pageTypeToEmbed);
+    bool ReplaceContent(Type pageTypeToEmbed, string pageTag);
 
     /// <summary>
-    /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering an <see cref="SelectionChanged"/>.
+    /// Replaces the contents of the navigation frame, without changing the currently selected item or triggering a <see cref="SelectionChanged"/>.
     /// </summary>
     bool ReplaceContent(UIElement pageInstanceToEmbed, object? dataContext = null);
 

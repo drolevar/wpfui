@@ -90,7 +90,7 @@ public partial class NavigationView
     }
 
     /// <inheritdoc />
-    public virtual bool ReplaceContent(Type? pageTypeToEmbed)
+    public virtual bool ReplaceContent(Type pageTypeToEmbed, string pageTag)
     {
         if (pageTypeToEmbed == null)
         {
@@ -109,7 +109,7 @@ public partial class NavigationView
             return false;
         }
 
-        UpdateContent(_pageService.GetPage(pageTypeToEmbed));
+        UpdateContent(_pageService.GetPage(pageTypeToEmbed, pageTag));
 
         return true;
     }
@@ -269,7 +269,7 @@ public partial class NavigationView
 
         if (_pageService is not null)
         {
-            return _pageService.GetPage(viewItem.TargetPageType)
+            return _pageService.GetPage(viewItem.TargetPageType, viewItem.TargetPageTag)
                 ?? throw new InvalidOperationException(
                     $"{nameof(_pageService)}.{nameof(_pageService.GetPage)} returned null for type {viewItem.TargetPageType}."
                 );
@@ -284,10 +284,10 @@ public partial class NavigationView
                 $"Unable to get or create instance of {viewItem.TargetPageType} from cache."
             );
 
-        object? ComputeCachedNavigationInstance() => GetPageInstanceFromCache(viewItem.TargetPageType);
+        object? ComputeCachedNavigationInstance() => GetPageInstanceFromCache(viewItem.TargetPageType, viewItem.TargetPageTag);
     }
 
-    private object? GetPageInstanceFromCache(Type? targetPageType)
+    private object? GetPageInstanceFromCache(Type? targetPageType, string targetPageTag)
     {
         if (targetPageType is null)
         {
@@ -308,9 +308,9 @@ public partial class NavigationView
 
         if (_pageService is not null)
         {
-            System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} from cache using IPageService.");
+            System.Diagnostics.Debug.WriteLine($"Getting {targetPageType} with tag {targetPageTag} from cache using IPageService.");
 
-            return _pageService.GetPage(targetPageType)
+            return _pageService.GetPage(targetPageType, targetPageTag)
                 ?? throw new InvalidOperationException($"{nameof(_pageService.GetPage)} returned null");
         }
 

@@ -36,7 +36,7 @@ public class PageService : IPageService
     }
 
     /// <inheritdoc />
-    public FrameworkElement? GetPage(Type pageType)
+    public FrameworkElement? GetPage(Type pageType, string pageTag)
     {
         if (!typeof(FrameworkElement).IsAssignableFrom(pageType))
         {
